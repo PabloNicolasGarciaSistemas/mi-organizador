@@ -4,6 +4,38 @@ from pathlib import Path
 import streamlit as st
 
 DB_PATH = Path(__file__).resolve().parent / "tareas.db"
+AZUL = "#1565c0"
+FONDO = "#ffffff"
+
+ESTILOS = f"""
+<style>
+    html, body, [data-testid="stAppViewContainer"], [data-testid="stApp"], .stApp {{
+        background-color: {FONDO} !important;
+        color: {AZUL} !important;
+    }}
+    [data-testid="stHeader"], [data-testid="stToolbar"] {{
+        background-color: {FONDO} !important;
+    }}
+    [data-testid="stMarkdownContainer"], [data-testid="stMarkdownContainer"] p,
+    [data-testid="stCaptionContainer"], label, h1, h2, h3, span, .st-emotion-cache-1dp5vir {{
+        color: {AZUL} !important;
+    }}
+    .stTextInput input {{
+        color: {AZUL} !important;
+        background-color: {FONDO} !important;
+        border-color: {AZUL} !important;
+    }}
+    .stButton > button, .stFormSubmitButton > button {{
+        color: {AZUL} !important;
+        background-color: {FONDO} !important;
+        border: 1px solid {AZUL} !important;
+    }}
+    [data-testid="stAlert"] {{
+        color: {AZUL} !important;
+        background-color: #e3f2fd !important;
+    }}
+</style>
+"""
 
 
 def get_connection() -> sqlite3.Connection:
@@ -56,6 +88,7 @@ def delete_task(task_id: int) -> None:
 
 def main() -> None:
     st.set_page_config(page_title="Mi Organizador", layout="centered")
+    st.markdown(ESTILOS, unsafe_allow_html=True)
     init_db()
 
     st.title("Mi Organizador")
